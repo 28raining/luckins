@@ -37,10 +37,12 @@ header {
   background-color: #F7F5ED;
   padding: 20px 0;
   overflow: auto;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .header-content {
   width: 92%;
+  max-width: 1200px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -53,25 +55,103 @@ header {
 }
 
 .logo img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
+  display: block;
 }
 
-.contact-info {
+.welcome-message {
   flex: 1 1 auto;
   text-align: right;
-  padding-left: 20px;
+  padding-left: 30px;
 }
 
-.contact-info p {
-  margin: 5px 0;
+.welcome-message h1 {
+  font-family: Georgia, serif;
+  font-size: 36px;
+  font-weight: normal;
+  color: #2c2c2c;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.welcome-tagline {
   font-size: 1.1em;
+  color: #555;
+  line-height: 1.5;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Contact Bar */
+.contact-bar {
+  background-color: #ddeff8;
+  padding: 15px 0;
+  width: 100%;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.contact-bar p {
+  display: block;
+  margin: auto;
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+  padding: 0 4%;
+}
+
+.contact-bar em {
+  display: inline-block;
+  width: 32.5%;
+  text-align: center;
+  font-style: normal;
+  font-size: 1.05em;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #f5f3f0 0%, #e8e6e3 100%);
+  padding: 10px 10px;
+  text-align: center;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-content h2 {
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: normal;
+  color: #2c2c2c;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  border-bottom: 2px solid #d0d0d0;
+  padding-bottom: 15px;
+  display: inline-block;
+}
+
+.hero-content .lead {
+  font-size: 1.3em;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.hero-content p {
+  font-size: 1.1em;
+  color: #444;
+  line-height: 1.8;
+  margin: 15px 0;
 }
 
 /* Hours and map section */
 .hours-and-map {
   display: flex;
-  gap: 30px;
+  gap: 40px;
   margin-top: 40px;
   margin-bottom: 20px;
   align-items: flex-start;
@@ -82,17 +162,20 @@ header {
   min-width: 300px;
 }
 
-.opening-hours-container h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
+.opening-hours-container h3,
+.map-container h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
   font-weight: normal;
+  color: #2c2c2c;
+  font-family: Georgia, serif;
 }
 
 #opening-hours {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid #A6B0B1;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
@@ -133,24 +216,38 @@ header {
   max-width: 600px;
   height: 450px;
   border: 0;
-  border-radius: 5px;
-  border: 1px solid #A6B0B1;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Main content */
 .wrapper {
-  margin-left: 4%;
-  margin-right: 4%;
-  clear: both;
-  padding: 30px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 h2 {
   font-family: Georgia, serif;
-  font-size: 36px;
+  font-size: 32px;
   text-align: center;
   font-weight: normal;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  color: #2c2c2c;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #d0d0d0;
+}
+
+/* Section Styling */
+
+.gallery-section {
+  margin: 10px 0;
+  padding: 0px 0;
+}
+
+.hours-and-map-section {
+  margin-top: 0px;
+  padding: 0px 0;
 }
 
 .wrapper p {
@@ -161,38 +258,45 @@ h2 {
 
 /* Photo gallery */
 #photos {
-  padding: 10px;
-  padding-bottom: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 1px solid #A6B0B1;
-  border-radius: 5px;
-  text-align: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  max-width: 1200px;
 }
 
-#photos div {
-  width: 32.7%;
-  display: inline-block;
-  vertical-align: top;
+.photo-item {
+  flex: 1 1 300px;
+  max-width: 450px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#photos img {
-  margin: 10px;
-  width: 98%;
+.photo-item img {
+  width: 100%;
   height: auto;
+  display: block;
 }
 
 /* Footer */
 footer {
   background-color: #ddeff8;
-  padding: 20px 0;
+  padding: 15px 0;
+  margin-top: 10px;
 }
 
 footer p {
   display: block;
   margin: auto;
   width: 100%;
+  max-width: 1200px;
   text-align: center;
+  padding: 0 4%;
 }
 
 footer em {
@@ -200,17 +304,11 @@ footer em {
   width: 32.5%;
   text-align: center;
   font-style: normal;
-  font-size: 1.1em;
-  margin-top: 10px;
+  font-size: 1.05em;
 }
 
 span.separator {
-  width: 100%;
-  display: inline-block;
-  border: 7px solid #A6B0B1;
-  border-top: 0;
-  margin-top: 20px;
-  margin-bottom: 5px;
+  display: none;
 }
 
 /* Responsive */
@@ -220,10 +318,18 @@ span.separator {
     text-align: center;
   }
 
-  .contact-info {
+  .welcome-message {
     text-align: center;
     padding-left: 0;
-    margin-top: 15px;
+    margin-top: 20px;
+  }
+
+  .welcome-message h1 {
+    font-size: 28px;
+  }
+
+  .welcome-tagline {
+    font-size: 1em;
   }
 
   .logo img {
@@ -231,30 +337,68 @@ span.separator {
     height: 150px;
   }
 
-  #photos div {
-    width: 49%;
+  .hero {
+    padding: 40px 20px;
   }
 
-  #photos .photo2 {
-    display: none;
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero-tagline {
+    font-size: 1.1em;
+  }
+
+  #photos {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .photo-item {
+    max-width: 100%;
+    width: 100%;
   }
 
   .hours-and-map {
     flex-direction: column;
+    gap: 30px;
   }
 
   .map-container iframe {
     max-width: 100%;
   }
 
+  .contact-bar em {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+  }
+
   footer em {
     display: block;
     width: 100%;
-    margin: 5px 0;
+    margin: 8px 0;
   }
 
   h2 {
     font-size: 28px;
+  }
+
+  .hours-and-map-section {
+    margin: 10px 0;
+    padding: 0px 0;
+  }
+
+  .hero {
+    padding: 40px 20px;
+  }
+
+  .hero-content h2 {
+    font-size: 26px;
+  }
+
+  .hero-content .lead {
+    font-size: 1.1em;
   }
 }
 
@@ -264,8 +408,20 @@ span.separator {
     height: 120px;
   }
 
-  #photos div {
-    width: 100%;
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .hero-tagline {
+    font-size: 1em;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .about-section .lead {
+    font-size: 1.1em;
   }
 }
 
