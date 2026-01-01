@@ -52,7 +52,6 @@ header {
 
 .welcome-message h1 {
   font-family: Georgia, serif;
-  font-size: 36px;
   font-weight: normal;
   color: #2c2c2c;
   margin-bottom: 10px;
@@ -60,7 +59,6 @@ header {
 }
 
 .welcome-tagline {
-  font-size: 1.1em;
   color: #555;
   line-height: 1.5;
   font-style: italic;
@@ -95,27 +93,31 @@ header {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #f5f3f0 0%, #e8e6e3 100%);
-  padding: 10px 10px;
-  text-align: center;
+  padding: 40px 10px;
   border-bottom: 1px solid #d0d0d0;
-}
-
-.hero-content {
-  max-width: 800px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.hero-content h2 {
-  font-family: Georgia, serif;
-  font-size: 32px;
-  font-weight: normal;
-  color: #2c2c2c;
-  margin-bottom: 20px;
-  line-height: 1.2;
-  border-bottom: 2px solid #d0d0d0;
-  padding-bottom: 15px;
-  display: inline-block;
+.hero-content {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-image {
+  flex: 1;
+  max-width: 500px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .hero-content .lead {
@@ -174,7 +176,6 @@ header {
 #opening-hours li {
   padding: 8px 0;
   border-bottom: 1px solid #e0e0e0;
-  font-size: 1.1em;
 }
 
 #opening-hours li:last-child {
@@ -228,7 +229,6 @@ header {
 .wrapper p {
   margin: 15px 0;
   line-height: 1.6;
-  font-size: 1.1em;
 }
 
 /* Photo gallery */
