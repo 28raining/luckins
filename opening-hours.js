@@ -11,13 +11,54 @@ function displayOpeningHours(weekdayDescriptions, specialOpeningHours) {
     return;
   }
 
+  // Helper function to format date as "Dec 25th"
+  function formatDateWithOrdinal(year, month, day) {
+    const date = new Date(year, month - 1, day);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthName = months[date.getMonth()];
+    
+    return `${monthName} ${day}`;
+  }
+
+  // Helper function to get weekday name from a date
+  function getWeekdayName(year, month, day) {
+    const date = new Date(year, month - 1, day);
+    return date.toLocaleDateString('en-US', { weekday: 'long' });
+  }
+
   let html = '<ul>';
   
   // Regular weekday hours
   weekdayDescriptions.forEach(dayText => {
     const parts = dayText.split(':');
     if (parts.length >= 2) {
-      html += `<li><span class="day">${parts[0]}:</span> ${parts.slice(1).join(':').trim()}</li>`;
+      const weekdayName = parts[0].trim();
+      const hoursText = parts.slice(1).join(':').trim();
+      
+      // Check if this weekday matches any special day
+      let matchingSpecialDay = null;
+      if (specialOpeningHours && specialOpeningHours.specialDays && specialOpeningHours.specialDays.length > 0) {
+        matchingSpecialDay = specialOpeningHours.specialDays.find(specialDay => {
+          const specialDayWeekday = getWeekdayName(
+            specialDay.date.year,
+            specialDay.date.month,
+            specialDay.date.day
+          );
+          return specialDayWeekday === weekdayName;
+        });
+      }
+      
+      if (matchingSpecialDay) {
+        // Format as "Friday 11:00 am - 1:00 pm (Dec 25th)"
+        const dateFormatted = formatDateWithOrdinal(
+          matchingSpecialDay.date.year,
+          matchingSpecialDay.date.month,
+          matchingSpecialDay.date.day
+        );
+        html += `<li style="background-color: #fff3cd; font-weight: bold;"><span class="day">${weekdayName}:</span> ${hoursText} (${dateFormatted})</li>`;
+      } else {
+        html += `<li><span class="day">${weekdayName}:</span> ${hoursText}</li>`;
+      }
     } else {
       html += `<li>${dayText}</li>`;
     }
@@ -25,31 +66,6 @@ function displayOpeningHours(weekdayDescriptions, specialOpeningHours) {
   
   html += '</ul>';
   
-  // Special opening hours (holidays, etc.)
-  if (specialOpeningHours && specialOpeningHours.specialDays && specialOpeningHours.specialDays.length > 0) {
-    html += '<h4 style="margin-top: 20px; margin-bottom: 10px; font-size: 18px; font-weight: normal;">Special Hours</h4>';
-    html += '<ul>';
-    
-    specialOpeningHours.specialDays.forEach(specialDay => {
-      const date = new Date(specialDay.date.year, specialDay.date.month - 1, specialDay.date.day);
-      const dateStr = date.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      
-      if (specialDay.hours) {
-        // Has specific hours
-        const hoursText = specialDay.hours.map(h => {
-          const openTime = `${String(h.openTime.hours).padStart(2, '0')}:${String(h.openTime.minutes).padStart(2, '0')}`;
-          const closeTime = `${String(h.closeTime.hours).padStart(2, '0')}:${String(h.closeTime.minutes).padStart(2, '0')}`;
-          return `${openTime} - ${closeTime}`;
-        }).join(', ');
-        html += `<li><span class="day">${dateStr}:</span> ${hoursText}</li>`;
-      } else {
-        // Closed or no hours specified
-        html += `<li><span class="day">${dateStr}:</span> Closed</li>`;
-      }
-    });
-    
-    html += '</ul>';
-  }
   
   openingHoursDiv.innerHTML = html;
   openingHoursDiv.classList.remove('loading');
@@ -59,7 +75,7 @@ function displayOpeningHours(weekdayDescriptions, specialOpeningHours) {
 fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
   headers: {
     "X-Goog-Api-Key": API_KEY,
-    "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,currentOpeningHours.specialDays"
+    "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,currentOpeningHours.specialDays,currentOpeningHours.periods"
   }
 })
   .then(res => {
