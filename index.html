@@ -36,15 +36,8 @@
 
     <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-content">
-        <p class="lead">
-          We are proud to competitively price our wine with any supermarket, and
-          we will not be beaten on price.
-        </p>
-        <p>
-          We're sure there's something for you, so why not come visit us or give
-          us a call...
-        </p>
+      <div class="hero-content" id="hero-content">
+        <p class="loading">Loading content...</p>
       </div>
       <div class="hero-image">
         <img src="images/shop_3.jpg" alt="Wine inside Luckins" />
@@ -88,5 +81,49 @@
     </footer>
 
     <script src="opening-hours.js"></script>
+    <script>
+      // Fetch and display Luckins content from API
+      const API_BASE = 'https://punch-bowl.william-kelsey.workers.dev';
+      
+      async function loadHeroContent() {
+        const heroContentDiv = document.getElementById('hero-content');
+        
+        try {
+          // Fetch both title and description
+          const [titleResponse, descriptionResponse] = await Promise.all([
+            fetch(`${API_BASE}/api/content/luckins_title`),
+            fetch(`${API_BASE}/api/content/luckins_description`)
+          ]);
+          
+          const titleData = await titleResponse.json();
+          const descriptionData = await descriptionResponse.json();
+          
+          const title = titleData.page_text || '';
+          const description = descriptionData.page_text || '';
+          
+          // Build HTML content
+          let html = '';
+          
+          if (title) {
+            html += `<h2 class="lead">${title}</h2>`;
+          }
+          
+          if (description) {
+            // Split description by newlines to preserve formatting
+            const descriptionLines = description.split('\n').filter(line => line.trim());
+            descriptionLines.forEach(line => {
+              html += `<p>${line}</p>`;
+            });
+          }
+          
+          heroContentDiv.innerHTML = html;
+          heroContentDiv.classList.remove('loading');
+        } catch (error) {
+          console.error('Error loading hero content:', error);
+        }
+      }
+      // Load content when page loads
+      loadHeroContent();
+    </script>
   </body>
 </html>
