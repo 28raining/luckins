@@ -68,7 +68,7 @@ header {
 /* Contact Bar */
 .contact-bar {
   background-color: #ddeff8;
-  padding: 15px 0;
+  padding: 15px 10px;
   width: 100%;
   border-bottom: 2px solid #e0e0e0;
   display: flex;
@@ -96,6 +96,7 @@ header {
   padding: 40px 10px;
   border-bottom: 1px solid #d0d0d0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 30px;
   max-width: 1200px;
@@ -105,6 +106,7 @@ header {
 .hero-content {
   flex: 1;
   text-align: center;
+  min-width: 350px;
 }
 
 .hero-image {
@@ -211,52 +213,17 @@ header {
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0px 10px;
 }
 
 /* Section Styling */
 
-.gallery-section {
-  margin: 10px 0;
-  padding: 0px 0;
-}
-
 .hours-and-map-section {
   margin-top: 0px;
-  padding: 0px 0;
+  padding: 0px 0px;
 }
 
 .wrapper p {
   margin: 15px 0;
   line-height: 1.6;
 }
-
-/* Photo gallery */
-#photos {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  max-width: 1200px;
-}
-
-.photo-item {
-  flex: 1 1 300px;
-  max-width: 450px;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.photo-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-
-
